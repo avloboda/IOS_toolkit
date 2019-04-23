@@ -13,10 +13,10 @@ enable_level = '14'
 
 current_date = time.strftime('%m-%d-%Y') # get todays date; will be appended to config filenames.
 
-def connect_to(username, password, ip_address, enable_secret): # establish connection to the device
+def connect_to(username, password, device, enable_secret): # establish connection to the device
 	ios_device = {
 		'device_type': 'cisco_ios',
-		'ip': ip_address,
+		'ip': device,
 		'username': username,
 		'password': password,
 		'secret': enable_secret
@@ -25,13 +25,13 @@ def connect_to(username, password, ip_address, enable_secret): # establish conne
 		net_connect = ConnectHandler(**ios_device)
 		return net_connect
 	except (AuthenticationException):
-		print('Authentication failure while trying: {}'.format(ip_address))
+		print('Authentication failure while trying: {}'.format(device))
 		return None
 	except (EOFError):
-		print('End of file error while trying {}'.format(ip_address))
+		print('End of file error while trying {}'.format(device))
 		return None
 	except (NetMikoTimeoutException):
-		print('Timeout while trying {}'.format(ip_address))
+		print('Timeout while trying {}'.format(device))
 		return None
 	except Exception as unknown_error:
 		print('Unknown error has occured: {}'.format(unknown_error))
