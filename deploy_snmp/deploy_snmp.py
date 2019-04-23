@@ -39,10 +39,8 @@ def connect_to(username, password, device, enable_secret): # establish connectio
 with open('devices_list') as file:				#file containing list of hostname/IPs of devices to be configured.
 	devices_list = file.read().splitlines()
 
-# below is the SNMPv3 configuration we are deploying.
-commands = ['snmp-server group SecSNMP v3 priv',
-'snmp-server user Librenms SecSNMP v3 auth sha authpassword priv aes 128 privpassword',
-'snmp-server host 10.2.2.2 trap version 3 priv Librenms']
+with open('commands') as file:				#file containing list of commands to be configured.
+	commands = file.read().splitlines()
 
 start_time = time.time() # keeps track of how long it takes the script to finish.
 
